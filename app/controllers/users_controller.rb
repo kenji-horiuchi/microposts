@@ -20,22 +20,31 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @user = User.find(params[:id])
   end
   
   def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :area, :age, :password,
                                  :password_confirmation)
   end
   
   def correct_user
     # 自分＝current_user
     # 編集対象のユーザー=@user
-    redirect_to root_path if false
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user
   end
   
 end
