@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
     has_secure_password
-    validates :area , presence: true
-    validates :age, numericality: { greater_than_or_equal_to: 0, only_integer: true, less_than: 150 }
+    validates :area , length: { maximum: 100}
+    validates :age, numericality: { greater_than_or_equal_to: 0, only_integer: true, less_than: 150 } , allow_blank: true 
 end

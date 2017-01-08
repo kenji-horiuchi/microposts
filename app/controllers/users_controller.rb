@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     # 自分＝current_user
     # 編集対象のユーザー=@user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user
+    redirect_to(root_path) unless @user == current_user
   end
   
 end
