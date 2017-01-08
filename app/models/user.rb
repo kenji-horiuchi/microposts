@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
                       uniqueness: { case_sensitive: false }
     has_secure_password
     validates :area , length: { maximum: 100}
-    validates :age, numericality: { greater_than_or_equal_to: 0, only_integer: true, less_than: 150 } , allow_blank: true 
+    validates :age, numericality: { greater_than_or_equal_to: 0, only_integer: true, less_than: 150 } , allow_blank: true
+    has_many :microposts
 end
