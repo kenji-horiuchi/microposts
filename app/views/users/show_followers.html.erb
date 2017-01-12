@@ -1,0 +1,9 @@
+<% @user.each do |user| %>
+<table>
+<tr>
+  <td>  <%= user.name %> </td>
+  <td><%= link_to 'view my profile', @user %></td>
+</tr>
+
+</table>
+<% end %>
