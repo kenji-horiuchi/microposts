@@ -1,9 +1,9 @@
-<% @user.each do |user| %>
+<h2>Followed users</h2>
+<% @users.each do |user| %>
 <table>
 <tr>
-  <td>  <%= user.name %> </td>
-  <td><%= link_to 'view my profile', @user %></td>
+  <td> <%= user.name %> </td>
+  <td> <%= link_to 'view my profile' %> </td>
 </tr>
-
 </table>
 <% end %>
