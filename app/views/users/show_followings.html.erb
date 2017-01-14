@@ -1,10 +1,8 @@
-<h2>Following users</h2>
-<% @users.each do |user| %>
-<table>
-<tr>
-  <td> <%= gravatar_for user %> </td>
-  <td> <%= user.name %> </td>
-  <td> <%= link_to 'view my profile', user %> </td>
-</tr>
-</table>
+<h1>Following users</h1>
+<section>
+    <% @users.each do |user| %>
+    <%= gravatar_for user %>
+    <h2><%= user.name %> </h2>
+    <span><%= link_to 'view my profile', user %> </span>
+</section>
 <% end %>
