@@ -2,8 +2,9 @@
 <% @users.each do |user| %>
 <table>
 <tr>
+  <td> <%= gravatar_for user %> </td>
   <td> <%= user.name %> </td>
-  <td> <%= link_to 'view my profile' %> </td>
+  <td> <%= link_to 'view my profile', user %> </td>
 </tr>
 </table>
 <% end %>
