@@ -1,0 +1,6 @@
+<h1>Favorites microposts</h1>
+<section>
+    <% @microposts.each do |micropost| %>
+    <h2><%= micropost.content %> </h2>      <!-- Micropostモデルからcontentカラムを呼び出す -->
+</section>
+<% end %>

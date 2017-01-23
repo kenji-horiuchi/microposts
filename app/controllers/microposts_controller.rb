@@ -1,6 +1,8 @@
 class MicropostsController < ApplicationController
     before_action :logged_in_user, only: [:create]
-
+  
+  def show 
+  end
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
@@ -22,6 +24,6 @@ class MicropostsController < ApplicationController
   
   private
   def micropost_params
-    params.require(:micropost).permit(:content)
+    params.require(:micropost).permit(:content, :picture)
   end
 end

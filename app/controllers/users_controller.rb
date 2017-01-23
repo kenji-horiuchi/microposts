@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
-  
-  def show # 追加
-   @user = User.find(params[:id])
-   @microposts = @user.microposts.order(created_at: :desc)
+ 
+  def index
+   @users = User.page(params[:page]).per(10).order(:id)
+  end
+  def show 
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -35,22 +38,48 @@ class UsersController < ApplicationController
   end
   
   def followings
-      @user  = User.find(params[:id])
-      @users = @user.following_users
+      @user  = User.find(params[:id])  #　あるユーザーを取得する(@user)
+      @users = @user.following_users   #  あるユーザーがフォローしているユーザーを取得し、インスタンス変数(@users)に代入する
       render 'show_followings'
   end
 
   def followers
-      @user  = User.find(params[:id])
-      @users = @user.follower_users
+      @user  = User.find(params[:id])  #　あるユーザーを取得する(@user)
+      @users = @user.follower_users    #　あるユーザーをフォローしているユーザーを取得し、インスタンス変数(@users)に代入する
       render 'show_followers'
   end
+  
+  def favorites
+      @user  = User.find(params[:id])  #　あるユーザーを取得する(@user)
+      #@favorites = @user.favorites     #　あるユーザーのお気に入りしている投稿一覧を取得し、インスタンス変数(@microposts)に代入する
+      @microposts = @user.favorite_microposts
+      render 'favorites'
+  end
+  
+  #def microposts
+  #    @user  = User.find(params[:id])  
+  #    @favorites = @user.favorites     
+  #    render 'favorites'
+  #end
+  
+  #　コントローラアクションのデバックの方法
+  #def favorites
+  #  logger.debug("<<<<<")
+  #  logger.debug("ID: " + params[:id])
+  #  logger.debug("User")
+  #    @user = User.find(params[:id])
+  #  logger.debug(@user)
+  #  logger.debug("Favorites")
+  #    @favorites = @user.favorites
+  #  logger.debug(@favorites)
+  #    render 'favorites'
+  #end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :area, :age, :password,
-                                 :password_confirmation)
+                                 :password_confirmation, :image)
   end
   
   def correct_user
