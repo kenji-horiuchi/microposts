@@ -1,1 +1,1 @@
-$("#favorite_form").html("<%= escape_javascript(render('microposts/unfavorite')) %>");
+$("#fav-<%= @micropost.id %>").html("<%= escape_javascript(render('microposts/unfavorite', micropost: @micropost)) %>");

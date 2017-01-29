@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get :favorites, on: :member
   end
   
+  resources :microposts,          only: [:create, :destroy]
   resources :microposts do
     # resources :favorite, only: [:create, :destroy]
     # post   microposts/:micropost_id/favorites favorites#create

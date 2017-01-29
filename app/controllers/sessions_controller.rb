@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
-  def new
+  def new                                                                # new.html.erbへ
   end
   
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
+    @user = User.find_by(email: params[:session][:email].downcase)       # 
+                                                                         # downcaseメソッドは、文字列中の大文字を小文字に変えた新しい文字列を返す
+    if @user && @user.authenticate(params[:session][:password])          # 
+                                                                         # &&＝かつ
       session[:user_id] = @user.id
       flash[:info] = "logged in as #{@user.name}"
       redirect_to @user
@@ -15,7 +17,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    session[:user_id] = nil
+    session[:user_id] = nil                                              #
     redirect_to root_path
   end
 end

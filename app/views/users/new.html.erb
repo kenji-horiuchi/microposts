@@ -4,7 +4,6 @@
     <%= form_for(@user) do |f| %>
     
       <%= render 'shared/error_messages', object: f.object %> 
-      <!-- ここを追加 -->
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
     

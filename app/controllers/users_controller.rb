@@ -2,24 +2,24 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
  
   def index
-   @users = User.page(params[:page]).per(10).order(:id)
+    @users = User.page(params[:page]).per(10).order(:id)         
   end
   def show 
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
+    @user = User.find(params[:id])                               # あるユーザを取得(@user)
+    @microposts = @user.microposts.order(created_at: :desc)      # あるユーザーに紐付いたマイクロポストを作成日時が新しいものから取得し、@micropostsに代入
   end
   
   def new
-    @user = User.new
+    @user = User.new                                             # あるユーザーを作成し、インスタンス変数(@user)に代入
   end
   
   def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user # ここを修正
-    else
-      render 'new'
+    @user = User.new(user_params)                                # 送信されたパラメータの内容をもとに(user_params)新しいユーザーを作成し、インスタンス変数(@user)に代入
+    if @user.save                                                # 新しいユーザ(Userモデルのインスタンス)をデータベースに保存する場合
+      flash[:success] = "Welcome to the Sample App!"             # "Welcome to the Sample App"という情報を受け渡し
+      redirect_to @user # redirect_to user_path(@user) でもOK    # user_pathにリダイレクト
+    else                                                         # 保存できない場合
+      render 'new'                                               # newアクション(new.html.erb)にレンダリング
     end
   end
   
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   def followings
       @user  = User.find(params[:id])  #　あるユーザーを取得する(@user)
       @users = @user.following_users   #  あるユーザーがフォローしているユーザーを取得し、インスタンス変数(@users)に代入する
+                                       #  *follower_usersはUserモデルにて関連付けているので、メソッドとして使える
       render 'show_followings'
   end
 
@@ -50,9 +51,9 @@ class UsersController < ApplicationController
   end
   
   def favorites
-      @user  = User.find(params[:id])  #　あるユーザーを取得する(@user)
-      #@favorites = @user.favorites     #　あるユーザーのお気に入りしている投稿一覧を取得し、インスタンス変数(@microposts)に代入する
-      @microposts = @user.favorite_microposts
+      @user  = User.find(params[:id])           #　あるユーザーを取得する(@user)
+      #@favorites = @user.favorites    
+      @microposts = @user.favorite_microposts   #　あるユーザーのお気に入りしている投稿一覧を取得し、インスタンス変数(@microposts)に代入する
       render 'favorites'
   end
   

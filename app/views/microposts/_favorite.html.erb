@@ -1,4 +1,5 @@
-<%= form_for(current_user.favorite_microposts.build, remote: true) do |f| %>
-  <div><%= hidden_field_tag :micropost_id, user.id %></div>
+<%= form_for(current_user.favorites.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+  <!-- `favorites_controller.rb`のcreateアクション（メソッド）で受け取れるパラメータは"params[:micropost_id]"になる -->
   <%= f.submit "Favorite", class: "btn btn-primary" %>
 <% end %>

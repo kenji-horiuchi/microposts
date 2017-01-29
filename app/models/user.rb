@@ -51,13 +51,14 @@ class User < ActiveRecord::Base
     end
     # お気に入りに登録しているかどうか
     def favorite?(micropost)
-      favorites.include?(favorite_microposts)
+       favorite_microposts.include?(micropost) # ()の意味？
+      #favorites.include?(favorite_microposts)
     end
     
     # usersテーブルに追加したカラムの名前をmount_uploaderに指定
     mount_uploader :image, ImageUploader
     
     def feed_items
-     Micropost.where(user_id: following_user_ids + [self.id])
+     Micropost.where(user_id: following_user_ids + [self.id])     # where＝データベースから条件を指定し、条件に当てはまるレコードをすべて取得する
     end
 end

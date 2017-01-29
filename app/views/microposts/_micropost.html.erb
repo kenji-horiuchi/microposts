@@ -12,10 +12,7 @@
                                        data: { confirm: "You sure?" } %>
     <% end %>
   </span>
-  <% if current_user.favorite?(micropost) %>
-    <% favorite = { id: 1 }%>
-    <%= link_to "お気に入りの解除", favorite_path(favorite_id: micropost.id), method: :delete %>
-  <% else %>
-    <%= link_to "お気に入りに登録", favorites_path(favorite_id: micropost.id), method: :post %>
-  <% end %>
+    <%= render 'microposts/favorite_form', micropost: micropost %>
+    <!-- micropost: micropost → パーシャル(部分テンプレート)で使う変数: 渡す値 -->
 </li>
+

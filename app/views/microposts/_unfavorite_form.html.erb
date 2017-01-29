@@ -1,7 +1,0 @@
-<%= form_for(current_user.favorite_microposts.find_by(micropost_id: user.id),
-             Favorites.find_by(micropost_id: user.id, current_user.id)
-             'favorites/1'
-             html: { method: :delete },
-             remote: true) do |f| %>
-  <%= f.submit "Unfavorite", class: "btn" %>
-<% end %>

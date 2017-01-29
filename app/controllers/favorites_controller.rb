@@ -2,24 +2,15 @@ class FavoritesController < ApplicationController
     before_action :logged_in_user
    
     def create 
-        @micropost = Micropost.find(params[:favorite_id])
-        # @favorite  = current_user.favorites.build(micropost: @micropost)
-        current_user.favorite(@micropost)
-        flash[:success] = "お気に入りに登録されました！"
-        redirect_to :back
-        # if @favorite.save
-        #     redirect_to micropost_url(:user), notice: "お気に入りに登録しました"
-        # else
-        #     redirect_to micropost_url(:user), alert: "このツイートはお気に入りに登録できません"
-        # end
+        @micropost = Micropost.find(params[:micropost_id])  # Micropostモデルからmicropost_idがキーになっている値を取得し、インスタンス変数(@micropost)に代入
+        current_user.favorite(@micropost)                  # @micropostの中から現在のユーザーがお気に入りを登録
+        #flash[:success] = "お気に入りに登録されました！"
+        #redirect_to :back
     end
-    
     def destroy
-         f = Favorite.find(params[:id])
-         f.destroy if f
-      
-        # @favorite = current_user.favorites.find_by!(micropost_id: params[:micropost_id])
-        # @favorite.destroy
-        # redirect_to micropost_url, notice: "お気に入りを解除しました"
+        @micropost = Micropost.find(params[:micropost_id])
+        #current_user.unfavorite(@micropost)
+         f = Favorite.find(params[:id])                    # (Favoriteモデルから)あるお気に入りを取得(f)
+         f.destroy if f                                    # fが存在している場合、fを削除 
     end
 end
